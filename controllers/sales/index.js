@@ -19,11 +19,8 @@ module.exports = (router) => {
 	});
 
 	router.post('/many', async(req, res) => {
-		console.log(req.body.data);
 		var movement = new Movement();
 		var result = await movement.createMultipleMovements(req.body.data);
-		//var movement = new Movement(req.body.movement_date, req.body.customer, req.body.person, req.body.product, req.body.ammount, req.body.selling_price, req.body.cost_price, req.body.IVA, req.body.cash, req.body.movementType, req.body.sale_type, req.body.description);
-		//var result = await movement.createMovement();
 		res.send(result);
 	});
 }

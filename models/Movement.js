@@ -21,10 +21,23 @@ module.exports = class Movement {
   }
 
   createMultipleMovements(movements) {
-    console.log(movements);
-    let query = 'INSERT INTO Movements (sale_date, customer, person, product, ammount, selling_price, cost_price, IVA, cash, movementType, sale_type, description) VALUES ';
+    var movementsArray = [];
+    movements.forEach(movement => {
+      let movementArray = [movement.movement_date, movement.customer, movement.person, movement.product, movement.amount, movement.selling_price, movement.cost_price, movement.iva, movement.cash, movement.movementType, movement.sale_type, movement.description];
+      movementsArray.push(movementArray);
+    });
+    return new Promise((resolve, reject) => {
+      connection.query('INSERT INTO Movements (sale_date, customer, person, product, ammount, selling_price, cost_price, IVA, cash, movementType, sale_type, description) VALUES ?', [movementsArray], (error, results, fields) => {
+        if(error) throw error;
+        resolve(results);
+      });
+    });
+    console.log(movementsArray);
+    /*let query = 'INSERT INTO Movements (sale_date, customer, person, product, ammount, selling_price, cost_price, IVA, cash, movementType, sale_type, description) VALUES ';
     let substring = '';
-    for(let i = 0; i < movements.length; i++) {
+    for(var i = 0; i < movements.length; i++) {
+      console.log(i);
+      console.log(substring);
       if(i === movements.length - 1) {
         substring += substring + '("' + movements[i].movement_date + '", "' + movements[i].customer + '", "' + movements[i].person + '", "' + movements[i].product + '", "' + movements[i].amount + '", "' + movements[i].selling_price + '", "' + movements[i].cost_price + '", "' + movements[i].iva + '", "' + movements[i].cash + '", "' + movements[i].movementType + '", "' + movements[i].sale_type + '", "' + movements[i].description + '")';
       } else {
@@ -32,13 +45,14 @@ module.exports = class Movement {
       }
     }
     query += substring;
+    console.log(substring);
     console.log(query);
     return new Promise((resolve, reject) => {
       connection.query(query, (error, results, fields) => {
         if(error) throw error;
         resolve(results);
       })
-    });
+    });*/
   }
 
   createMovement() {
