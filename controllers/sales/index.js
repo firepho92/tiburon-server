@@ -23,4 +23,9 @@ module.exports = (router) => {
 		var result = await movement.createMultipleMovements(req.body.data);
 		res.send(result);
 	});
+	router.post('/last', async(req, res) => {
+		var movement = new Movement();
+		var result = await movement.readLastMovements(req.body.customer_id);
+		res.send(result);
+	});
 }

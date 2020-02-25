@@ -88,4 +88,13 @@ module.exports = class Movement {
       });
     });
   }
+
+  readLastMovements(customer) {
+    return new Promise((resolve, reject) => {
+      connection.query('SELECT sale_id, sale_date, ammount, Movements.product, Movements.selling_price, Movements.cost_price, IVA, cash, sale_type, Movements.description, customer_name, personal_name, product_name, movement FROM Movements INNER JOIN Customers ON Movements.customer = Customers.customer_id INNER JOIN Personal ON movements.person = Personal.personal_id INNER JOIN Products ON movements.product = Products.product_id INNER JOIN MovementType ON Movements.movementType = movementType_id WHERE Movements.customer = ' + customer + ' AND Movements.movementType = 4 ORDER BY sale_id DESC LIMIT 5', (error, results, fields) => {
+        if(error) throw error;
+        resolve(results);
+      });
+    });
+  }
 }
