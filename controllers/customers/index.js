@@ -20,9 +20,9 @@ module.exports = (router) => {
 		res.send(result);
 	});
 
-	router.get('/customerDebt', async () => {
+	router.get('/customerdebt', async () => {
 		var customer = new Customer();
-		var result = await customer.currentDebt(customer_id);
+		var result = await customer.currentDebt(req.body.customer_id);
 		res.send(result);
 	});
 }
