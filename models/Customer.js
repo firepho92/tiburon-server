@@ -53,4 +53,13 @@ module.exports = class Customer {
       });
     })
   }
+
+  currentDebt(customer_id) {
+    return new Promise((resolve, reject) => {
+      connection.query('select (select coalesce(sum(ammount * selling_price ), 0) as m from Movements where customer = ' + customer_id + ') - (select coalesce(sum(ammount), 0) from Deposits where customer = ' + customer_id + ') as debt', (error, results, fields) => {
+        if(error) throw error;
+        resolve(results);
+      });
+    });
+  }
 }

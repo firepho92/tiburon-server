@@ -32,7 +32,7 @@ module.exports = class Movement {
         resolve(results);
       });
     });
-    console.log(movementsArray);
+    //console.log(movementsArray);
     /*let query = 'INSERT INTO Movements (sale_date, customer, person, product, ammount, selling_price, cost_price, IVA, cash, movementType, sale_type, description) VALUES ';
     let substring = '';
     for(var i = 0; i < movements.length; i++) {
