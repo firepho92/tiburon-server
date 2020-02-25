@@ -20,7 +20,7 @@ module.exports = (router) => {
 		res.send(result);
 	});
 
-	router.get('/customerdebt', async () => {
+	router.post('/customerdebt', async () => {
 		var customer = new Customer();
 		var result = await customer.currentDebt(req.body.customer_id);
 		res.send(result);
