@@ -1,6 +1,5 @@
 'use strict'
 var Movement = require('../../models/Movement.js');
-var Product = require('../../models/Product.js');
 
 module.exports = (router) => {
 	router.get('/', async (req, res) => {
@@ -26,7 +25,7 @@ module.exports = (router) => {
 	
 	router.post('/last', async(req, res) => {
 		var movement = new Movement();
-		//var result = await movement.readLastMovements(req.body.customer_id);
+		var result = await movement.readLastMovements(req.body.customer_id);
 		res.send(req.body.customer_id);
 	});
 }
