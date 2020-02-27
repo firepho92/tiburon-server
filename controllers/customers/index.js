@@ -23,6 +23,6 @@ module.exports = (router) => {
 	router.post('/customerdebt', async (req, res) => {
 		var customer = new Customer();
 		var result = await customer.currentDebt(req.body.customer_id);
-		res.send(result);
+		res.send(result[0]);
 	});
 }
